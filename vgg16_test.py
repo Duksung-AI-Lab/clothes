@@ -1,16 +1,14 @@
-import os
-from tensorflow import keras
-from tensorflow.keras import layers
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-import matplotlib.pyplot as plt
+.import keras,os
+from keras.models import Sequential
+from keras.layers import Dense, Conv2D, MaxPool2D , Flatten
+from keras.preprocessing.image import ImageDataGenerator
 import numpy as np
-import tensorflow.compat.v1 as tf
+import matplotlib.pyplot as plt
+import tensorflow as tf
 
-tf.disable_v2_behavior()
-
-seed = 0
-np.random.seed(seed)
-tf.set_random_seed(seed)
+tf.compat.v1.disable_eager_execution()
+mirrored_strategy = tf.distribute.MirroredStrategy()
+mirrored_strategy = tf.distribute.MirroredStrategy(devices=["/gpu:0", "/gpu:1"])
 
 rootPath = 'dataset/collars'
 img_size = (125, 150)
@@ -39,49 +37,43 @@ testGen = testGenerator.flow_from_directory(os.path.join(rootPath, 'test'), clas
                                             target_size=img_size, shuffle=True,
                                             color_mode='rgba')
 
-# (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
-# x_train, x_test = x_train / 255.0, x_test / 255.0
 
-inputs = keras.Input(shape=(img_size + (4,)))
-x = inputs
-x = layers.Conv2D(64, 3, activation='relu', padding="same")(x)
-x = layers.Conv2D(64, 3, activation='relu', padding="same")(x)
-x = layers.MaxPooling2D(2)(x)
-x = layers.Conv2D(128, 3, activation='relu', padding="same")(x)
-x = layers.Conv2D(128, 3, activation='relu', padding="same")(x)
-x = layers.MaxPooling2D(2)(x)
-x = layers.Conv2D(256, 3, activation='relu', padding="same")(x)
-x = layers.Conv2D(256, 3, activation='relu', padding="same")(x)
-x = layers.MaxPooling2D(2)(x)
-x = layers.Conv2D(512, 3, activation='relu', padding="same")(x)
-x = layers.Conv2D(512, 3, activation='relu', padding="same")(x)
-#x = layers.MaxPooling2D(2)(x)
+model = Sequential()
+model.add(Conv2D(input_shape=(img_size + (4,)),filters=64,kernel_size=(3,3),padding="same", activation="relu"))
+model.add(Conv2D(filters=64,kernel_size=(3,3),padding="same", activation="relu"))
+model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+model.add(Conv2D(filters=128, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(Conv2D(filters=128, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+model.add(Conv2D(filters=256, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(Conv2D(filters=256, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(Conv2D(filters=256, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+model.add(Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+model.add(Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(Conv2D(filters=512, kernel_size=(3,3), padding="same", activation="relu"))
+model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
 
-x = layers.Flatten()(x)
-x = layers.Dense(512)(x)
-x = layers.Dense(512)(x)
-x = layers.Dense(3, activation='softmax')(x)
-outputs = x
+model.add(Flatten())
+model.add(Dense(units=4096,activation="relu"))
+model.add(Dense(units=4096,activation="relu"))
+model.add(Dense(units=3, activation="softmax"))
 
-model = keras.Model(inputs, outputs)
-model.summary()
+from keras.optimizers import Adam
+opt = Adam(lr=0.001)
+model.compile(optimizer=opt, loss=keras.losses.categorical_crossentropy, metrics=['acc'])
 
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
-epochs = 15
-history = model.fit_generator(trainGen,
-                              epochs=epochs,
-                              steps_per_epoch=trainGen.samples / epochs * 5,
-                              validation_data=valGen,
-                              validation_steps=valGen.samples / epochs)
+from keras.callbacks import ModelCheckpoint, EarlyStopping
+checkpoint = ModelCheckpoint("vgg16_1.h5", monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=False, mode='auto', period=1)
+early = EarlyStopping(monitor='val_acc', min_delta=0, patience=20, verbose=1, mode='auto')
+history = model.fit_generator(steps_per_epoch=100,generator=trainGen, validation_data= valGen, validation_steps=10,epochs=30,callbacks=[checkpoint,early])
 
 print("\n Valid Accuracy: %.4f" % (model.evaluate_generator(valGen)[1]))
 print("\n Test Accuracy: %.4f" % (model.evaluate_generator(testGen)[1]))
-
-# model.compile(optimizer='adam',
-#               loss='sparse_categorical_crossentropy',
-#               metrics=['acc'])
-# history = model.fit(x_train, y_train, epochs=5)
-# model.evaluate(x_test,  y_test, verbose=2)
 
 # graph
 acc = history.history['acc']
@@ -105,4 +97,4 @@ plt.legend()
 
 plt.show()
 
-model.save('collars_model_vgg16_2.h5')
+model.save('collars_model_vgg16.h5')
