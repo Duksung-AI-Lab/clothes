@@ -10,3 +10,6 @@ find &amp; classification
 ## dataset
 collar_v2_crop : 더 명확한 기준을 가진 셔츠 카라 이미지들로 라벨링한 것(카라부분만 잘려진 이미지)\
 mask_collars_crop_200x200 : 이미지 크기들이 조금씩 달라서 200x200으로 맞춘 마스크 이미지들(카라부분만 잘려진 마스크 이미지)
+
+## resnet_test.py
+
