@@ -16,8 +16,9 @@ mask_collars_crop_200x200 : 이미지 크기들이 조금씩 달라서 200x200�
 필터 사이즈가 3x3으로 고정, 16개의 층으로 구성
 
 ## resnet_test.py
-skip connection을 이용한 모델\
-VGGNet보다 깊은 층으로 설계
+skip connection, bottleneck을 이용한 모델\
+VGGNet보다 깊은 층으로 설계\
+특성맵들끼리 더하는 방식
 
 ## CNN-SENet.ipynb
 어떤 모델에도 적용할 수 있는 SE Block을 활용한 모델\
@@ -27,3 +28,13 @@ convolution을 통해 생성된 특성을 채널당 중요도를 고려해서 �
 ## Black_White_Image.ipynb
 데이터로 쓸 이미지들의 크기들이 조금씩 달라서 정해진 크기로 만들어주는 코드\
 200x200로 셔츠 카라부분만 crop해서 생성
+
+## DenseNet(titu).ipynb
+특성맵끼리 concatenation을 시킨 모델\
+bottleneck 이용\
+ResNet보다 적은 파라미터 
+
+## u-net_segmentation.ipynb
+적은 데이터를 가지고도 정확한 Segmentation\
+U자형태의 모델, Contracting path+Expansive path\
+End-to-End 구조
