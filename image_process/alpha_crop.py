@@ -2,7 +2,7 @@ import os
 import cv2
 import numpy as np
 
-dir_path = 'dataset/collars_500x600/'  # 경로 지정
+dir_path = 'dataset/collars_v2/'  # 경로 지정
 save_dir = dir_path[:-1] + '_crop/'  # 경로 자동 생성
 
 # 디렉토리 없으면 생성
