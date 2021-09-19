@@ -176,11 +176,13 @@ $(function(){
 			<!-- 분류 결과 이미지 출력 -->
 			<br><br><br><br>
 		{% if class_res %}
-   	 	<table class="result_table" id="class_table">
-				<tr>
-					<td><img class="result_img" src="{{ url_for('static', filename=class_res) }}"></td>
-				</tr>
-			</table>
+ 	 	<table class="result_table" id="class_table">
+			<tr>
+				{% for img in class_res %}
+				<td><img class="result_img" src="{{ url_for('static', filename='images/result_img/'+img) }}"></td>
+				{% endfor %}
+			</tr>
+		</table>
     {% endif %}
 		</form>
 		</div>
@@ -195,11 +197,13 @@ $(function(){
 			<div align="center" id='view_area'></div><br><br>
 
     {% if search_res %}
-   	 	<table class="result_table" id="search_table">
-				<tr>
-					<td><img class="result_img" src="{{ url_for('static', filename=search_res) }}"></td>
-				</tr>
-			</table>
+ 	 	<table class="result_table" id="search_table">
+			<tr>
+				{% for img in search_res %}
+				<td><img class="result_img" src="{{ url_for('static', filename=img) }}"></td>
+				{% endfor %}
+			</tr>
+		</table>
     {% endif %}
 			
 			<br><br><br><br><br><br><br><br><br>
