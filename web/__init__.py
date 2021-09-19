@@ -36,12 +36,10 @@ def post():
         # root_path()
 
         # Reference Image
-        collar = request.form['collars_img']
-        pattern = request.form['pattern_img']
-        result_img_path = '/Users/kr/Downloads/ICT 결과물을 위한 전달자료/카라&패턴 예측/모델이 분류한 ' \
-                         'DataSet/카라_통합_DataSet_이용/' + 'Band_check/141.jpg'
-                         # + str(collar) + '_' + str(pattern)
-
+        collar = request.form['collars']
+        pattern = request.form['pattern']
+        result_dir_path = './static/images/result_img/' + str(collar) + '_' + str(pattern)
+        result_img_path = result_dir_path
 
         # # User Image (target image)
         # user_img = request.files['user_img']

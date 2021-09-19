@@ -140,33 +140,33 @@ $(function(){
 			<h2 style="color: #353535">collars type</h2><br>
 			<table class="refer_table">
 				<tr>
-					<td><img class="collars_img" src="../image/collars_img/band1.png"></td>
-					<td><img class="collars_img" src="../image/collars_img/straight.png"></td>
-					<td><img class="collars_img" src="../image/collars_img/notched.png"></td>
-					<td><img class="collars_img" src="../image/collars_img/button down.png"></td>
+					<td><img class="collars_img" src="{{ url_for('static', filename='images/collars_img/band1.png') }}"></td>
+					<td><img class="collars_img" src="{{ url_for('static', filename='images/collars_img/straight.png') }}"></td>
+					<td><img class="collars_img" src="{{ url_for('static', filename='images/collars_img/notched.png') }}"></td>
+					<td><img class="collars_img" src="{{ url_for('static', filename='images/collars_img/button down.png') }}"></td>
 				</tr>
 				<tr>
-					<td><input type="radio" name="collars_img" value="Band"></td>
-					<td><input type="radio" name="collars_img" value="Straight"></td>
-					<td><input type="radio" name="collars_img" value="Notched"></td>
-					<td><input type="radio" name="collars_img" value="ButtonDown"></td>
+					<td><input type="radio" name="collars" value="Band"></td>
+					<td><input type="radio" name="collars" value="Straight"></td>
+					<td><input type="radio" name="collars" value="Notched"></td>
+					<td><input type="radio" name="collars" value="ButtonDown"></td>
 				</tr>
 			</table>
 
 			<table class="refer_table">
 				<tr>
-					<td><img class="pattern_img" src="./image/pattern_img/check.jpg"></td>
-					<td><img class="pattern_img" src="../image/pattern_img/dot.jpg"></td>
-					<td><img class="pattern_img" src="../image/pattern_img/floral.jpg"></td>
-					<td><img class="pattern_img" src="../image/pattern_img/solid.jpg"></td>
-					<td><img class="pattern_img" src="../image/pattern_img/stripe.jpg"></td>
+					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/check.jpg') }}"></td>
+					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/dot.jpg') }}"></td>
+					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/floral.jpg') }}"></td>
+					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/solid.jpg') }}"></td>
+					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/stripe.jpg') }}"></td>
 				</tr>
 				<tr>
-					<td><input type="radio" name="pattern_img" value="check"></td>
-					<td><input type="radio" name="pattern_img" value="dot"></td>
-					<td><input type="radio" name="pattern_img" value="floral"></td>
-					<td><input type="radio" name="pattern_img" value="solid"></td>
-					<td><input type="radio" name="pattern_img" value="stripe"></td>
+					<td><input type="radio" name="pattern" value="check"></td>
+					<td><input type="radio" name="pattern" value="dot"></td>
+					<td><input type="radio" name="pattern" value="floral"></td>
+					<td><input type="radio" name="pattern" value="solid"></td>
+					<td><input type="radio" name="pattern" value="stripe"></td>
 				</tr>
 			</table>
 
@@ -178,10 +178,10 @@ $(function(){
 			<table class="result_table" id="class_table">
 				<tr>
 					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
-<!-- 					<td><img class="result_img" src="../image/result_img/result2.png"></td>
-					<td><img class="result_img" src="../image/result_img/result3.png"></td>
-					<td><img class="result_img" src="../image/result_img/result4.png"></td>
-					<td><img class="result_img" src="../image/result_img/result5.png"></td> -->
+<!-- 					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
+					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
+					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
+					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td> -->
 				</tr>
 			</table>
 		</form>
@@ -198,11 +198,11 @@ $(function(){
 
 			<table class="result_table" id="search_table">
 				<tr>
-					<td><img class="result_img" src="../image/result_img/result1.png"></td>
-					<td><img class="result_img" src="../image/result_img/result2.png"></td>
-					<td><img class="result_img" src="../image/result_img/result3.png"></td>
-					<td><img class="result_img" src="../image/result_img/result4.png"></td>
-					<td><img class="result_img" src="../image/result_img/result5.png"></td>
+					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
+<!-- 					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
+					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
+					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
+					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td> -->
 				</tr>
 			</table>
 			<br><br><br><br><br><br><br><br><br>
