@@ -39,7 +39,7 @@ def post():
         collar = request.form['collars']
         pattern = request.form['pattern']
         result_dir_path = './static/images/result_img/' + str(collar) + '_' + str(pattern)
-        result_img_path = result_dir_path
+        result_img_path = result_dir_path + '/' + 'result1.jpg'
 
         # # User Image (target image)
         # user_img = request.files['user_img']
