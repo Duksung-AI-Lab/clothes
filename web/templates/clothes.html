@@ -80,7 +80,18 @@ $(function(){
 	}
 
 	/*Reference Images*/
-	.refer_img{
+	.collars_img{
+		width: 60%; 
+		height: auto;
+	}
+	.refer_img:hover{opacity: 0.5; cursor: pointer;}
+	.refer_img:onclick{opacity: 0.5; cursor: pointer;}
+	input[type="radio"]{
+		width: 25px; 
+		height: 25px;
+	}
+
+	.pattern_img{
 		width: 60%; 
 		height: auto;
 	}
@@ -129,33 +140,35 @@ $(function(){
 			<h2 style="color: #353535">collars type</h2><br>
 			<table class="refer_table">
 				<tr>
-					<td><img class="collars_img" src="./image/collars_img/band1.png"></td>
-					<td><img class="collars_img" src="./image/collars_img/straight.png"></td>
-					<td><img class="collars_img" src="./image/collars_img/notched.png"></td>
-					<td><img class="collars_img" src="./image/collars_img/button down.png"></td>
+					<td><img class="collars_img" src="../image/collars_img/band1.png"></td>
+					<td><img class="collars_img" src="../image/collars_img/straight.png"></td>
+					<td><img class="collars_img" src="../image/collars_img/notched.png"></td>
+					<td><img class="collars_img" src="../image/collars_img/button down.png"></td>
 				</tr>
 				<tr>
-					<td><input type="radio" name="collars_img" value="band"></td>
-					<td><input type="radio" name="collars_img" value="straight"></td>
-					<td><input type="radio" name="collars_img" value="notched"></td>
-					<td><input type="radio" name="collars_img" value="button_down"></td>
+					<td><input type="radio" name="collars_img" value="Band"></td>
+					<td><input type="radio" name="collars_img" value="Straight"></td>
+					<td><input type="radio" name="collars_img" value="Notched"></td>
+					<td><input type="radio" name="collars_img" value="ButtonDown"></td>
 				</tr>
 			</table>
 
-<!-- 			<table class="refer_table">
+			<table class="refer_table">
 				<tr>
-					<td><img class="refer_img" src="./image/band1.png"></td>
-					<td><img class="refer_img" src="./image/straight.png"></td>
-					<td><img class="refer_img" src="./image/notched.png"></td>
-					<td><img class="refer_img" src="./image/button down.png"></td>
+					<td><img class="pattern_img" src="./image/pattern_img/check.jpg"></td>
+					<td><img class="pattern_img" src="../image/pattern_img/dot.jpg"></td>
+					<td><img class="pattern_img" src="../image/pattern_img/floral.jpg"></td>
+					<td><img class="pattern_img" src="../image/pattern_img/solid.jpg"></td>
+					<td><img class="pattern_img" src="../image/pattern_img/stripe.jpg"></td>
 				</tr>
 				<tr>
-					<td><input type="radio" name="refer_img" value="band1.png"></td>
-					<td><input type="radio" name="refer_img" value="straight.png"></td>
-					<td><input type="radio" name="refer_img" value="notched.png"></td>
-					<td><input type="radio" name="refer_img" value="button_down.png"></td>
+					<td><input type="radio" name="pattern_img" value="check"></td>
+					<td><input type="radio" name="pattern_img" value="dot"></td>
+					<td><input type="radio" name="pattern_img" value="floral"></td>
+					<td><input type="radio" name="pattern_img" value="solid"></td>
+					<td><input type="radio" name="pattern_img" value="stripe"></td>
 				</tr>
-			</table> -->
+			</table>
 
 			<br><br><br>
 			<input type="submit" value="확인" class="class_btn"/>
@@ -164,11 +177,11 @@ $(function(){
 			<br><br><br><br>
 			<table class="result_table" id="class_table">
 				<tr>
-					<td><img class="result_img" src="./image/result_img/result1.png"></td>
-					<td><img class="result_img" src="./image/result_img/result2.png"></td>
-					<td><img class="result_img" src="./image/result_img/result3.png"></td>
-					<td><img class="result_img" src="./image/result_img/result4.png"></td>
-					<td><img class="result_img" src="./image/result_img/result5.png"></td>
+					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
+<!-- 					<td><img class="result_img" src="../image/result_img/result2.png"></td>
+					<td><img class="result_img" src="../image/result_img/result3.png"></td>
+					<td><img class="result_img" src="../image/result_img/result4.png"></td>
+					<td><img class="result_img" src="../image/result_img/result5.png"></td> -->
 				</tr>
 			</table>
 		</form>
@@ -185,11 +198,11 @@ $(function(){
 
 			<table class="result_table" id="search_table">
 				<tr>
-					<td><img class="result_img" src="./image/result_img/result1.png"></td>
-					<td><img class="result_img" src="./image/result_img/result2.png"></td>
-					<td><img class="result_img" src="./image/result_img/result3.png"></td>
-					<td><img class="result_img" src="./image/result_img/result4.png"></td>
-					<td><img class="result_img" src="./image/result_img/result5.png"></td>
+					<td><img class="result_img" src="../image/result_img/result1.png"></td>
+					<td><img class="result_img" src="../image/result_img/result2.png"></td>
+					<td><img class="result_img" src="../image/result_img/result3.png"></td>
+					<td><img class="result_img" src="../image/result_img/result4.png"></td>
+					<td><img class="result_img" src="../image/result_img/result5.png"></td>
 				</tr>
 			</table>
 			<br><br><br><br><br><br><br><br><br>
