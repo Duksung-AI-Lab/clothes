@@ -8,33 +8,19 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> -->
-
 <script type="text/javascript">
 $(function(){
   $('.class_btn').click(function(){
-    $('.result_table').show();
+    $('#class_table').show();
+  });
+});
+$(function(){
+  $('.search_btn').click(function(){
+    $('#search_table').show();
   });
 });
 </script>
-
-<!-- <script>
-	 $(function(){
-		$(window).scroll(function(){
-		var navbar = $(this).scrollTop();
-		console.log(navbar);
-		// var $header = $('header');
-		var $navbar_tag = $('.navbar')
-		if(navbar > 10){
-			$navbar_tag.addClass('activated');
-		}else{
-			$navbar_tag.removeClass('activated');
-		}
-	})
-	})
-</script> -->
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	function previewImage(targetObj, view_area) {
 	var preview = document.getElementById(view_area); //div id
 	var ua = window.navigator.userAgent;
@@ -76,14 +62,11 @@ $(function(){
 		}
 	}
 }
-</script> -->
+</script>
 <style type="text/css">
 	body{
 		font-family: Objective,sans-serif;
 	}
-	/*Logo*/
-	/*#h_img{width: 30px; height: 30px;}*/
-	/*카테고리*/
 	header{
 		width:100%;
 		position: static;
@@ -131,21 +114,8 @@ $(function(){
 	<!-- 상단 카테고리 -->
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		  <!-- <a class="navbar-brand" href="/"> -->
 		  	<h2 style="color: #8C1DF3; margin-top: 10px;">Shirts Classification with CNN</h2>
 		  	<h4 style="color: #8C1DF3; margin-top: 10px; margin-left: auto;">Duksung AI Lab</h4>
-		  <!-- </a> -->
-<!-- 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
-		  </button> -->
-<!-- 		  <div class="collapse navbar-collapse" id="navbarNav">
-		    <ul class="navbar-nav">
-		      <li class="nav-item"><a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a></li>
-		      <li class="nav-item"><a class="nav-link" href="/convnet_info">ConvNet?</a></li>
-		      <li class="nav-item"><a class="nav-link" href="/object_detection_get">Object Detection</a></li>
-		      <li class="nav-item active"><a class="nav-link" href="/nst_get">Neural Style Transfer</a></li>
-		    </ul>
-		  </div> -->
 		</nav>
 	</header>
 
@@ -191,7 +161,7 @@ $(function(){
 
 			<!-- 분류 결과 이미지 출력 -->
 			<br><br><br><br>
-			<table class="result_table">
+			<table class="result_table" id="class_table">
 				<tr>
 					<td><img class="result_img" src="./image/result_img/result1.png"></td>
 					<td><img class="result_img" src="./image/result_img/result2.png"></td>
@@ -201,17 +171,27 @@ $(function(){
 				</tr>
 			</table>
 		</div>
+		<br><br><br><br><br><br>
 
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		<!-- Target Image 사용자 업로드 -->
-		<div class="sub-div">
+		<div class="sub-div" style="background-color: #ebebeb;">
 			<h1 align="center" class="main_title">Search Your Image</h1><br><br>
-			<input type="file" name="user_img" id="user_img" value="userImage" onchange="previewImage(this,'view_area')"/>
-			<input type="submit" value="확인" class="search_btn"/>
-			<br><br>
-			<div align="center" id='view_area'></div>
+			<input type="file" name="user_img" id="user_img" value="userImage" accept="image/jpeg,.jpg,.png" onchange="previewImage(this,'view_area')" required/>
+			<input type="submit" value="확인" class="search_btn"/><br><br>
+			<div align="center" id='view_area'></div><br><br>
+
+			<table class="result_table" id="search_table">
+				<tr>
+					<td><img class="result_img" src="./image/result_img/result1.png"></td>
+					<td><img class="result_img" src="./image/result_img/result2.png"></td>
+					<td><img class="result_img" src="./image/result_img/result3.png"></td>
+					<td><img class="result_img" src="./image/result_img/result4.png"></td>
+					<td><img class="result_img" src="./image/result_img/result5.png"></td>
+				</tr>
+			</table>
+
+			<br><br><br><br><br><br><br><br><br>
 		</div>
 	</center>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
 </html> 
