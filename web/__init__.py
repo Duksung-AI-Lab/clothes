@@ -21,17 +21,17 @@ def root_path():
 ''' Main page '''
 @app.route('/')
 def index():
-	return render_template('index.html')
+	return render_template('clothes.html')
 
-''' ConvNet info page '''
-@app.route('/convnet_info')
-def convnet_info():
-	return render_template('convnet_info.html')
-
-''' Neural Style Transfer '''
-@app.route('/nst_get')
-def nst_get():
-	return render_template('nst_get.html')
+# ''' ConvNet info page '''
+# @app.route('/convnet_info')
+# def convnet_info():
+# 	return render_template('convnet_info.html')
+#
+# ''' Neural Style Transfer '''
+# @app.route('/nst_get')
+# def nst_get():
+# 	return render_template('nst_get.html')
 
 @app.route('/nst_post', methods=['GET','POST'])
 def nst_post():
