@@ -121,6 +121,7 @@ $(function(){
 
 	<center>
 		<div class="sub-div">
+		<form method="POST">
 			<h1 align="center" class="main_title">Select Component Types</h1>
 			<br><br><br>
 
@@ -128,16 +129,16 @@ $(function(){
 			<h2 style="color: #353535">collars type</h2><br>
 			<table class="refer_table">
 				<tr>
-					<td><img class="refer_img" src="./image/collars_img/band1.png"></td>
-					<td><img class="refer_img" src="./image/collars_img/straight.png"></td>
-					<td><img class="refer_img" src="./image/collars_img/notched.png"></td>
-					<td><img class="refer_img" src="./image/collars_img/button down.png"></td>
+					<td><img class="collars_img" src="./image/collars_img/band1.png"></td>
+					<td><img class="collars_img" src="./image/collars_img/straight.png"></td>
+					<td><img class="collars_img" src="./image/collars_img/notched.png"></td>
+					<td><img class="collars_img" src="./image/collars_img/button down.png"></td>
 				</tr>
 				<tr>
-					<td><input type="radio" name="refer_img" value="band1.png"></td>
-					<td><input type="radio" name="refer_img" value="straight.png"></td>
-					<td><input type="radio" name="refer_img" value="notched.png"></td>
-					<td><input type="radio" name="refer_img" value="button_down.png"></td>
+					<td><input type="radio" name="collars_img" value="band"></td>
+					<td><input type="radio" name="collars_img" value="straight"></td>
+					<td><input type="radio" name="collars_img" value="notched"></td>
+					<td><input type="radio" name="collars_img" value="button_down"></td>
 				</tr>
 			</table>
 
@@ -170,11 +171,13 @@ $(function(){
 					<td><img class="result_img" src="./image/result_img/result5.png"></td>
 				</tr>
 			</table>
+		</form>
 		</div>
 		<br><br><br><br><br><br>
 
 		<!-- Target Image 사용자 업로드 -->
 		<div class="sub-div" style="background-color: #ebebeb;">
+		<form method="POST">
 			<h1 align="center" class="main_title">Search Your Image</h1><br><br>
 			<input type="file" name="user_img" id="user_img" value="userImage" accept="image/jpeg,.jpg,.png" onchange="previewImage(this,'view_area')" required/>
 			<input type="submit" value="확인" class="search_btn"/><br><br>
@@ -189,8 +192,8 @@ $(function(){
 					<td><img class="result_img" src="./image/result_img/result5.png"></td>
 				</tr>
 			</table>
-
 			<br><br><br><br><br><br><br><br><br>
+		</form>
 		</div>
 	</center>
 </body>

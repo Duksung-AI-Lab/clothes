@@ -6,8 +6,6 @@ os.chdir(sub_path)
 from flask import Flask, escape, request,  Response, g, make_response
 from flask.templating import render_template
 from werkzeug.utils import secure_filename
-from . import neural_style_transfer
-from .darkflow_yolo import processing_images
 
 app = Flask(__name__)
 app.debug = True
@@ -20,32 +18,28 @@ def root_path():
 
 ''' Main page '''
 @app.route('/')
-def index():
+def clothes():
 	return render_template('clothes.html')
 
-# ''' ConvNet info page '''
-# @app.route('/convnet_info')
-# def convnet_info():
-# 	return render_template('convnet_info.html')
-#
-# ''' Neural Style Transfer '''
-# @app.route('/nst_get')
-# def nst_get():
-# 	return render_template('nst_get.html')
 
-@app.route('/nst_post', methods=['GET','POST'])
-def nst_post():
+''' Neural Style Transfer '''
+@app.route('.')
+def _get():
+	return render_template('clothes.html')
+
+@app.route('.', methods=['GET','POST'])
+def _post():
 	if request.method == 'POST':
 		root_path()
 
 		# Reference Image
-		refer_img = request.form['refer_img']
+		collars = request.form['collars_img']
 		refer_img_path = '/images/nst_get/'+str(refer_img)
 
-		# User Image (target image)
-		user_img = request.files['user_img']
-		user_img.save('./flask_deep/static/images/'+str(user_img.filename))
-		user_img_path = '/images/'+str(user_img.filename)
+		# # User Image (target image)
+		# user_img = request.files['user_img']
+		# user_img.save('./flask_deep/static/images/'+str(user_img.filename))
+		# user_img_path = '/images/'+str(user_img.filename)
 
 		# Neural Style Transfer 
 		transfer_img = neural_style_transfer.main(refer_img_path, user_img_path)
