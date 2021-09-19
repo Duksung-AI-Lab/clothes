@@ -84,8 +84,8 @@ $(function(){
 		width: 60%; 
 		height: auto;
 	}
-	.refer_img:hover{opacity: 0.5; cursor: pointer;}
-	.refer_img:onclick{opacity: 0.5; cursor: pointer;}
+	.collars_img:hover{opacity: 0.5; cursor: pointer;}
+	.collars_img:onclick{opacity: 0.5; cursor: pointer;}
 	input[type="radio"]{
 		width: 25px; 
 		height: 25px;
@@ -95,8 +95,8 @@ $(function(){
 		width: 60%; 
 		height: auto;
 	}
-	.refer_img:hover{opacity: 0.5; cursor: pointer;}
-	.refer_img:onclick{opacity: 0.5; cursor: pointer;}
+	.pattern_img:hover{opacity: 0.5; cursor: pointer;}
+	.pattern_img:onclick{opacity: 0.5; cursor: pointer;}
 	input[type="radio"]{
 		width: 25px; 
 		height: 25px;
@@ -112,7 +112,7 @@ $(function(){
 	}
 
 	.result_table{
-		display: none;
+		/*display: none;*/
 		text-align: center;
 	}
 
@@ -155,56 +155,53 @@ $(function(){
 
 			<table class="refer_table">
 				<tr>
+					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/solid.jpg') }}"></td>
 					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/check.jpg') }}"></td>
 					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/dot.jpg') }}"></td>
 					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/floral.jpg') }}"></td>
-					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/solid.jpg') }}"></td>
 					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/stripe.jpg') }}"></td>
 				</tr>
 				<tr>
+					<td><input type="radio" name="pattern" value="solid"></td>
 					<td><input type="radio" name="pattern" value="check"></td>
 					<td><input type="radio" name="pattern" value="dot"></td>
 					<td><input type="radio" name="pattern" value="floral"></td>
-					<td><input type="radio" name="pattern" value="solid"></td>
 					<td><input type="radio" name="pattern" value="stripe"></td>
 				</tr>
 			</table>
 
 			<br><br><br>
-			<input type="submit" value="확인" class="class_btn"/>
+			<input type="submit" value="확인" class="class_btn" name="classform" formmethod="POST" />
 
 			<!-- 분류 결과 이미지 출력 -->
 			<br><br><br><br>
-			<table class="result_table" id="class_table">
+		{% if class_res %}
+   	 	<table class="result_table" id="class_table">
 				<tr>
-					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
-<!-- 					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
-					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
-					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
-					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td> -->
+					<td><img class="result_img" src="{{ url_for('static', filename=class_res) }}"></td>
 				</tr>
 			</table>
+    {% endif %}
 		</form>
 		</div>
 		<br><br><br><br><br><br>
 
 		<!-- Target Image 사용자 업로드 -->
 		<div class="sub-div" style="background-color: #ebebeb;">
-		<form method="POST">
+		<form method="POST" enctype="multipart/form-data">
 			<h1 align="center" class="main_title">Search Your Image</h1><br><br>
 			<input type="file" name="user_img" id="user_img" value="userImage" accept="image/jpeg,.jpg,.png" onchange="previewImage(this,'view_area')" required/>
-			<input type="submit" value="확인" class="search_btn"/><br><br>
+			<input type="submit" value="확인" class="search_btn" name="searchform" formmethod="POST" /><br><br>
 			<div align="center" id='view_area'></div><br><br>
 
-			<table class="result_table" id="search_table">
+    {% if search_res %}
+   	 	<table class="result_table" id="search_table">
 				<tr>
-					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
-<!-- 					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
-					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
-					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td>
-					<td><img class="result_img" src="{{ url_for('static', filename=image_file) }}"></td> -->
+					<td><img class="result_img" src="{{ url_for('static', filename=search_res) }}"></td>
 				</tr>
 			</table>
+    {% endif %}
+			
 			<br><br><br><br><br><br><br><br><br>
 		</form>
 		</div>

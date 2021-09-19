@@ -25,65 +25,28 @@ def clothes():
     return render_template('clothes.html')
 
 
-# @app.route('.')
-# def get():
-#     return render_template('clothes.html')
+result_img_path, user_img_path = None, None
 
 
 @app.route('/', methods=['GET', 'POST'])
 def post():
     if request.method == 'POST':
         # root_path()
+        global result_img_path, user_img_path
+        if "classform" in request.form:
+            # Reference Image
+            collar = request.form['collars']
+            pattern = request.form['pattern']
+            result_dir_path = './images/result_img/' + str(collar) + '_' + str(pattern)
+            result_img_path = result_dir_path + '/' + 'result3.jpg'
 
-        # Reference Image
-        collar = request.form['collars']
-        pattern = request.form['pattern']
-        result_dir_path = './static/images/result_img/' + str(collar) + '_' + str(pattern)
-        result_img_path = result_dir_path + '/' + 'result1.jpg'
+        else:
+            # User Image
+            user_img = request.files['user_img']
+            user_img_path = './images/result_img/Band_dot/406.jpg'
 
-        # # User Image (target image)
-        # user_img = request.files['user_img']
-        # user_img.save('./flask_deep/static/images/'+str(user_img.filename))
-        # user_img_path = '/images/'+str(user_img.filename)
+        return render_template('clothes.html', class_res=result_img_path, search_res=user_img_path)
 
-        # # Neural Style Transfer
-        # transfer_img = neural_style_transfer.main(refer_img_path, user_img_path)
-        # transfer_img_path = '/images/' + str(transfer_img.split('/')[-1])
-
-    return render_template('clothes.html',
-                           image_file=result_img_path)
-
-
-
-### Object Detection ###
-# @app.route('/object_detection_get')
-# def object_detection_get():
-#     return render_template('object_detection_get.html')
-#
-#
-# @app.route('/object_detection_post', methods=['GET', 'POST'])
-# def object_detection_post():
-#     if request.method == 'POST':
-#
-#         root_path()
-#         # User Image
-#         user_img = request.files['object_img']
-#         user_img.save('./flask_deep/static/images/' + str(user_img.filename))
-#         user_img_path = '../static/images/' + str(user_img.filename)
-#
-#         user_img_type = str(user_img.filename).split('.')[1]
-#         # img file
-#         if user_img_type in ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG']:
-#             print('Type is Image')
-#             # Object Detection by darkflow with YOLO V2
-#             detected_img = processing_images.main(user_img_path)
-#             detected_img_path = '../static/images/' + str(detected_img.split('/')[-1])
-#
-#         # video file
-#         elif user_img_type in ['avi', 'AVI', 'mp4', 'MP4', 'MPEG', 'mkv', 'MKV']:
-#             print('Type is Video')
-#
-#     return render_template('object_detection_post.html', detected_img=detected_img_path)
 
 if __name__ == "__main__":
     app.run()
