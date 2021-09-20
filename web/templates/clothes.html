@@ -21,7 +21,7 @@ $(function(){
 });
 </script>
 <script type="text/javascript">
-	function previewImage(targetObj, view_area) {
+function previewImage(targetObj, view_area) {
 	var preview = document.getElementById(view_area); //div id
 	var ua = window.navigator.userAgent;
 
@@ -39,8 +39,8 @@ $(function(){
 		img.id = "prev_" + view_area;
 		img.classList.add("obj");
 		img.file = file;
-		img.style.width = '700px'; 
-		img.style.height = '400px';
+		img.style.width = '400px'; 
+		img.style.height = 'auto';
 		preview.appendChild(img);
 		if (window.FileReader) { // FireFox, Chrome, Opera 확인.
 			var reader = new FileReader();
@@ -61,6 +61,8 @@ $(function(){
 			}
 		}
 	}
+
+	document.getElementById('view_area2').style.display = "none"; // hide
 }
 </script>
 <style type="text/css">
@@ -105,8 +107,8 @@ $(function(){
 	}
 
 	.result_img{
-		width: 90%; 
-		height: auto;
+		width: auto; 
+		height: 250px;
 	}
 
 	.refer_table{
@@ -175,21 +177,21 @@ $(function(){
 			</table>
 
 			<br><br><br>
-			<input type="submit" value="확인" class="class_btn" name="classform" formmethod="POST" />
+			<input type="submit" value="확인" class="class_btn" name="classform"/>
 
 			<!-- 분류 결과 이미지 출력 -->
 			<br><br><br><br>
-		{% if class_res %}
- 	 	<table class="result_table" id="class_table">
- 	 		{% for i in range(2) %}
-			<tr>
-				{% for j in range(5) %}
-				<td><img class="result_img" src="{{ url_for('static', filename=class_res[i*5+j]) }}"></td>
+			{% if class_res %}
+	 	 	<table class="result_table" id="class_table">
+	 	 		{% for i in range(2) %}
+				<tr>
+					{% for j in range(5) %}
+					<td><img class="result_img" src="{{ url_for('static', filename=class_res[i*5+j]) }}"></td>
+					{% endfor %}
+				</tr>
 				{% endfor %}
-			</tr>
-			{% endfor %}
-		</table>
-    {% endif %}
+			</table>
+	    {% endif %}
 		</form>
 		</div>
 		<br><br><br><br><br><br>
@@ -199,20 +201,26 @@ $(function(){
 		<form method="POST" enctype="multipart/form-data">
 			<h1 align="center" class="main_title">Search Your Image</h1><br><br>
 			<input type="file" name="user_img" id="user_img" value="userImage" accept="image/jpeg,.jpg,.png" onchange="previewImage(this,'view_area')" required/>
-			<input type="submit" value="확인" class="search_btn" name="searchform" formmethod="POST" /><br><br>
-			<div align="center" id='view_area'></div><br><br>
+			<input type="submit" value="확인" class="search_btn" name="searchform"/><br><br>
+			<div align="center" id='view_area'></div>
 
-    {% if search_res %}
- 	 	<table class="result_table" id="search_table">
- 	 		{% for i in range(2) %}
-			<tr>
-				{% for j in range(5) %}
-				<td><img class="result_img" src="{{ url_for('static', filename=search_res[i*5+j]) }}"></td>
+			{% if refer_img %}
+			<div align="center" id='view_area2'>
+	    	<img style="width: 400px; height: auto;" src="{{ url_for('static', filename=refer_img) }}">
+	    </div><br><br>
+	    {% endif %}
+
+	    {% if search_res %}
+	 	 	<table class="result_table" id="search_table">
+	 	 		{% for i in range(2) %}
+				<tr>
+					{% for j in range(5) %}
+					<td><img class="result_img" src="{{ url_for('static', filename=search_res[i*5+j]) }}"></td>
+					{% endfor %}
+				</tr>
 				{% endfor %}
-			</tr>
-			{% endfor %}
-		</table>
-    {% endif %}
+			</table>
+	    {% endif %}
 			
 			<br><br><br><br><br><br><br><br><br>
 		</form>

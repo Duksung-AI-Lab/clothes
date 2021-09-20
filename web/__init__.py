@@ -13,7 +13,7 @@ from flask.templating import render_template
 
 from tensorflow.keras.models import load_model
 
-class_file_list, search_file_list = None, None
+class_file_list, search_file_list, refer_img = None, None, None
 os.chdir('web/static')
 
 
@@ -29,8 +29,6 @@ def model_predict():
     pattern_result_classes = model.predict_classes(image)
     # pattern_result = model.predict(image)
     # print('예측:', pattern_cls_index[pattern_result_classes[0]], 100 * max(pattern_result[0]))
-
-    os.remove('user_img.jpg')
 
     return pattern_cls_index[pattern_result_classes[0]]
 
@@ -48,7 +46,7 @@ def clothes():
 @app.route('/', methods=['GET', 'POST'])
 def post():
     if request.method == 'POST':
-        global class_file_list, search_file_list
+        global class_file_list, search_file_list, refer_img
 
         if "classform" in request.form:
             # Reference Image
@@ -60,23 +58,27 @@ def post():
 
             random.shuffle(class_file_list)
             class_file_list = class_file_list[:10]
-
-            print(result_dir_path, class_file_list)
+            class_file_list.append(collar)
+            class_file_list.append(pattern)
 
         else:
             # User Image
             user_img = request.files['user_img']
             user_img.save('user_img.jpg')
+            refer_img = 'user_img.jpg'
 
+            collar = 'Regular'
             pattern = model_predict()
 
-            user_dir_path = os.path.join('images/result_img', 'Band' + '_' + pattern + '/*')
+            user_dir_path = os.path.join('images/result_img', collar + '_' + pattern + '/*')
             search_file_list = glob.glob(user_dir_path)
 
             random.shuffle(search_file_list)
             search_file_list = search_file_list[:10]
+            search_file_list.append(pattern)
 
-        return render_template('clothes.html', class_res=class_file_list, search_res=search_file_list)
+        return render_template('clothes.html', class_res=class_file_list, search_res=search_file_list,
+                               refer_img=refer_img)
 
 
 if __name__ == "__main__":
