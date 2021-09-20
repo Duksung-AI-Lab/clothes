@@ -81,8 +81,9 @@ $(function(){
 
 	/*Reference Images*/
 	.collars_img{
-		width: 60%; 
+		width: 200px; 
 		height: auto;
+		margin: 20px;
 	}
 	.collars_img:hover{opacity: 0.5; cursor: pointer;}
 	.collars_img:onclick{opacity: 0.5; cursor: pointer;}
@@ -92,8 +93,9 @@ $(function(){
 	}
 
 	.pattern_img{
-		width: 60%; 
+		width: 200px; 
 		height: auto;
+		margin: 10px;
 	}
 	.pattern_img:hover{opacity: 0.5; cursor: pointer;}
 	.pattern_img:onclick{opacity: 0.5; cursor: pointer;}
@@ -137,7 +139,7 @@ $(function(){
 			<br><br><br>
 
 			<!-- Reference Image 라디오 버튼 선택 -->
-			<h2 style="color: #353535">collars type</h2><br>
+			<h2 style="color: #353535">collars type</h2>
 			<table class="refer_table">
 				<tr>
 					<td><img class="collars_img" src="{{ url_for('static', filename='images/collars_img/band1.png') }}"></td>
@@ -152,14 +154,16 @@ $(function(){
 					<td><input type="radio" name="collars" value="ButtonDown"></td>
 				</tr>
 			</table>
+			<br><br><br>
 
+			<h2 style="color: #353535">pattern type</h2>
 			<table class="refer_table">
 				<tr>
-					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/solid.jpg') }}"></td>
-					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/check.jpg') }}"></td>
-					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/dot.jpg') }}"></td>
-					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/floral.jpg') }}"></td>
-					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/stripe.jpg') }}"></td>
+					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/solid.png') }}"></td>
+					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/check.png') }}"></td>
+					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/dot.png') }}"></td>
+					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/floral.png') }}"></td>
+					<td><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/stripe.png') }}"></td>
 				</tr>
 				<tr>
 					<td><input type="radio" name="pattern" value="solid"></td>
