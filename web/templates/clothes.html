@@ -28,7 +28,7 @@ $(function(){
 	var files = targetObj.files;
 	for ( var i = 0; i < files.length; i++) {
 		var file = files[i];
-		var imageType = /image.*/; //이미지 파일일경우만.. 뿌려준다.
+		var imageType = /image.*/; //이미지 파일일경우만 뿌려준다.
 		if (!file.type.match(imageType))
 			continue;
 		var prevImg = document.getElementById("prev_" + view_area); //이전에 미리보기가 있다면 삭제
@@ -171,22 +171,28 @@ $(function(){
 			</table>
 
 			<br><br><br>
-			<input type="submit" value="확인" class="class_btn" name="classform" formmethod="POST" />
+			<input type="submit" value="확인" class="class_btn" name="classform" formmethod="POST" /><br>
+
+			<a name="class_scr"></a>
+	
 
 			<!-- 분류 결과 이미지 출력 -->
-			<br><br><br><br>
-		{% if class_res %}
- 	 	<table class="result_table" id="class_table">
-			<tr>
-				{% for img in class_res %}
-				<td><img class="result_img" src="{{ url_for('static', filename='images/result_img/'+img) }}"></td>
+<!-- 			<br><br><br><br>
+			{% if class_res %}
+	 	 	<table class="result_table" id="class_table">
+	 	 		{% for i in range(2) %}
+				<tr>
+					{% for j in range(5) %}
+					<td><img class="result_img" src="{{ url_for('static', filename=class_res[i*5+j]) }}"></td>
+					{% endfor %}
+				</tr>
 				{% endfor %}
-			</tr>
-		</table>
-    {% endif %}
+			</table>
+	    {% endif %}
 		</form>
 		</div>
-		<br><br><br><br><br><br>
+		<br><br><br><br><br><br> -->
+<!-- 		<iframe src="class.html" name="a"> -->
 
 		<!-- Target Image 사용자 업로드 -->
 		<div class="sub-div" style="background-color: #ebebeb;">
@@ -196,17 +202,20 @@ $(function(){
 			<input type="submit" value="확인" class="search_btn" name="searchform" formmethod="POST" /><br><br>
 			<div align="center" id='view_area'></div><br><br>
 
-    {% if search_res %}
+		<!-- 검색 결과 이미지 출력 -->
+<!--     {% if search_res %}
  	 	<table class="result_table" id="search_table">
+ 	 		{% for i in range(2) %}
 			<tr>
-				{% for img in search_res %}
-				<td><img class="result_img" src="{{ url_for('static', filename=img) }}"></td>
+				{% for j in range(5) %}
+				<td><img class="result_img" src="{{ url_for('static', filename=search_res[i*5+j]) }}"></td>
 				{% endfor %}
 			</tr>
+			{% endfor %}
 		</table>
-    {% endif %}
+    {% endif %} -->
 			
-			<br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br>
 		</form>
 		</div>
 	</center>
