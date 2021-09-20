@@ -11,27 +11,11 @@ os.chdir(sub_path)
 from flask import Flask, escape, request, Response, g, make_response
 from flask.templating import render_template
 
-from tensorflow.keras.models import load_model
+import patterns
+import collar_and_pattern
 
 class_file_list, search_file_list, refer_img = None, None, None
 os.chdir('web/static')
-
-
-def model_predict():
-    model = load_model('models/pattern_5class.h5')
-
-    original_image = cv2.imread('user_img.jpg', cv2.IMREAD_COLOR)
-    image = cv2.resize(original_image, (224, 224))
-    image = image.astype('float32') / 255.
-    image = image.reshape((1, 224, 224, 3))
-
-    pattern_cls_index = ['check', 'dot', 'floral', 'solid', 'stripe']
-    pattern_result_classes = model.predict_classes(image)
-    # pattern_result = model.predict(image)
-    # print('예측:', pattern_cls_index[pattern_result_classes[0]], 100 * max(pattern_result[0]))
-
-    return pattern_cls_index[pattern_result_classes[0]]
-
 
 app = Flask(__name__)
 app.debug = True
@@ -68,7 +52,7 @@ def post():
             refer_img = 'user_img.jpg'
 
             collar = 'Regular'
-            pattern = model_predict()
+            pattern = patterns.model_predict()
 
             user_dir_path = os.path.join('images/result_img', collar + '_' + pattern + '/*')
             search_file_list = glob.glob(user_dir_path)
