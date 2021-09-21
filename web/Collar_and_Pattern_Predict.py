@@ -15,15 +15,15 @@ ROOT_DIR = os.path.abspath("/content/gdrive/MyDrive/Study/MaskRCNN")  ### 경로
 sys.path.append("/content/gdrive/MyDrive/Study/MaskRCNN")  ### 경로 확인
 
 # Path to weights file
-WEIGHTS_PATH = "/content/gdrive/MyDrive/Study/mask_rcnn_collar_0030.h5"  ### 경로 확인
+WEIGHTS_PATH = "models/MaskRCNN_collar_detect.h5"  ### 경로 확인
 
 # Directory to save logs and model checkpoints, if not provided
 DEFAULT_LOGS_DIR = os.path.join(ROOT_DIR, "logs")  ### 경로 확인
 
-# GPU
-config = tf.ConfigProto()
-config.gpu_options.allow_growth = True
-session = tf.Session(config=config)
+# # GPU
+# config = tf.ConfigProto()
+# config.gpu_options.allow_growth = True
+# session = tf.Session(config=config)
 
 
 ############################################################
@@ -78,7 +78,7 @@ def collar_predict():
 
     try:
         # Read image
-        image = cv.imread("/content/gdrive/MyDrive/Study/SHIRTS_9486.jpg", cv.IMREAD_COLOR)
+        image = cv.imread('user_img.jpg', cv.IMREAD_COLOR)
 
         # Detect objects
         r = model.detect([image], verbose=1)[0]
@@ -118,8 +118,7 @@ def collar_predict():
 
         # Load collar_model
         ### 경로 확인
-        collar_model = load_model(
-            "/content/gdrive/MyDrive/Study/MaskRCNN/samples/clothes/model/카라분류모델_4classes(MaskRCNN환경).h5")
+        collar_model = load_model("models/collars_4class.h5")
 
         crop_img = cv.resize(crop_img, (224, 224))
         crop_img = crop_img.astype('float32') / 255.
@@ -142,12 +141,11 @@ def collar_predict():
 def pattern_predict():
     # Load pattern_model
     ### 경로 확인
-    pattern_model = load_model(
-        '/content/gdrive/MyDrive/Study/MaskRCNN/samples/clothes/model/패턴분류모델_5classes(MaskRCNN환경).h5')
+    pattern_model = load_model('models/pattern_5class.h5')
 
     try:
         # Read image
-        original_image = cv.imread('/content/gdrive/MyDrive/Study/SHIRTS_9486.jpg', cv.IMREAD_COLOR)
+        original_image = cv.imread('user_img.jpg', cv.IMREAD_COLOR)
         image = cv.resize(original_image, (224, 224))
         image = image.astype('float32') / 255.
         image = image.reshape((1, 224, 224, 3))

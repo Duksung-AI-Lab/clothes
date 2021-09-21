@@ -12,7 +12,7 @@ from flask import Flask, escape, request, Response, g, make_response
 from flask.templating import render_template
 
 import patterns
-import collar_and_pattern
+# import Collar_and_Pattern_Predict
 
 class_file_list, search_file_list, refer_img = None, None, None
 os.chdir('web/static')
@@ -53,6 +53,9 @@ def post():
 
             collar = 'Regular'
             pattern = patterns.model_predict()
+
+            # collar = Collar_and_Pattern_Predict.collar_predict()
+            # pattern = Collar_and_Pattern_Predict.pattern_predict()
 
             user_dir_path = os.path.join('images/result_img', collar + '_' + pattern + '/*')
             search_file_list = glob.glob(user_dir_path)
