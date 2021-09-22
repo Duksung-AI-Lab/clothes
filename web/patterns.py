@@ -2,6 +2,7 @@ import cv2
 from tensorflow.keras.models import load_model
 
 
+
 def model_predict():
     model = load_model('models/pattern_5class.h5')
 
