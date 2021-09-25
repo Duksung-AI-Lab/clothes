@@ -212,7 +212,7 @@ function previewImage(targetObj, view_area) {
 	    {% endif %}
 
 	    {% if search_res %}
-	    <h2 style="color: #353535">{{ search_res[-1] }} shirts</h2>
+	    <h2 style="color: #353535">{{ search_res[-2] }} {{ search_res[-1] }} shirts</h2>
 	 	 	<table class="result_table" id="search_table">
 	 	 		{% for i in range(2) %}
 				<tr>
