@@ -59,12 +59,12 @@ def post():
             collar = collars.model_predict()
             pattern = patterns.model_predict()
 
-            if collar=='fail':
-                ##카라 탐지 못한 경우
-                print('탐색 실패')
-                return render_template('clothes.html')
+            # if collar=='fail':
+            #     ##카라 탐지 못한 경우
+            #     print('탐색 실패')
+            #     return render_template('clothes.html')
 
-            print(collar,pattern)
+            # print(collar, pattern)
             # collar = Collar_and_Pattern_Predict.collar_predict()
             # pattern = Collar_and_Pattern_Predict.pattern_predict()
             #user_dir_path = os.path.join('images/result_img', collar + '_' + pattern + '/*')
@@ -77,10 +77,11 @@ def post():
 
             random.shuffle(search_file_list)
             search_file_list = search_file_list[:10]
+            search_file_list.append(collar)
             search_file_list.append(pattern)
         return render_template('clothes.html', class_res=class_file_list, search_res=search_file_list,
                                refer_img=refer_img)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
 
