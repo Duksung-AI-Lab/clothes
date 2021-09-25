@@ -1,17 +1,14 @@
-import glob
-import os, sys
+import os
 import random
 from flask import Flask, escape, request, Response, g, make_response
 from flask.templating import render_template
 
-import patterns, collars
 
 real_path = os.path.dirname(os.path.realpath(__file__))
 sub_path = os.path.split(real_path)[0]
 os.chdir(sub_path)
 
-
-# import Collar_and_Pattern_Predict
+import Collar_and_Pattern_Predict
 
 class_file_list, search_file_list, refer_img = None, None, None
 os.chdir('web/static')
@@ -37,13 +34,10 @@ def post():
             pattern = str(request.form['pattern'])
 
             result_dir_path = 'images/result_img/'+collar+'_'+pattern
-            #class_file_list = glob.glob(result_dir_path)
             class_file_list =os.listdir(result_dir_path)
 
             for i in range(len(class_file_list)):
                 class_file_list[i]=os.path.join(result_dir_path+'/',class_file_list[i])
-
-            print(class_file_list)
 
             random.shuffle(class_file_list)
             class_file_list = class_file_list[:10]
@@ -56,30 +50,29 @@ def post():
             user_img.save('user_img.jpg')
             refer_img = 'user_img.jpg'
 
-            collar = collars.model_predict()
-            pattern = patterns.model_predict()
 
-            if collar=='fail':
-                ##카라 탐지 못한 경우
-                print('탐색 실패')
+            collar = Collar_and_Pattern_Predict.collar_predict()
+            pattern = Collar_and_Pattern_Predict.pattern_predict()
+
+            # predict fail error
+            if collar == 'fail' or pattern == 'fail':
+                print('predict fail')
                 return render_template('clothes.html')
 
-            print(collar,pattern)
-            # collar = Collar_and_Pattern_Predict.collar_predict()
-            # pattern = Collar_and_Pattern_Predict.pattern_predict()
-            #user_dir_path = os.path.join('images/result_img', collar + '_' + pattern + '/*')
-            user_dir_path = 'images/result_img/'+collar+'_'+pattern
-            #search_file_list = glob.glob(user_dir_path)
+            user_dir_path = 'images/result_img/' + collar + '_' + pattern
             search_file_list = os.listdir(user_dir_path)
 
             for i in range(len(search_file_list)):
-                search_file_list[i]=user_dir_path+'/'+search_file_list[i]
+                search_file_list[i] = user_dir_path + '/' + search_file_list[i]
 
             random.shuffle(search_file_list)
             search_file_list = search_file_list[:10]
+            search_file_list.append(collar)
             search_file_list.append(pattern)
+
         return render_template('clothes.html', class_res=class_file_list, search_res=search_file_list,
                                refer_img=refer_img)
+
 
 if __name__ == "__main__":
     app.run()
