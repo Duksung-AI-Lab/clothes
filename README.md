@@ -1,4 +1,4 @@
-## clothes
+# clothes
 find &amp; classification
 
 ## image_process directory
@@ -16,6 +16,7 @@ find &amp; classification
 ## web directory
 웹 개발을 위해 사용한 코드 및 데이터
 
+***
 ***
 
 ## collar_cnn.py
