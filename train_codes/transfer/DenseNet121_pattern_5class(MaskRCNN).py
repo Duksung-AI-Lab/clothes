@@ -12,6 +12,7 @@ from keras.callbacks import ModelCheckpoint,EarlyStopping
 np.random.seed(0)
 tf.set_random_seed(0)
 
+# GPU
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
 session = tf.Session(config=config)
