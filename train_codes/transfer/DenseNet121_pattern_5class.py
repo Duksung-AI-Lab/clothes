@@ -14,6 +14,7 @@ tf.disable_v2_behavior()
 np.random.seed(0)
 tf.set_random_seed(0)
 
+# GPU
 # gpus = tf.config.experimental.list_physical_devices('GPU')
 # if gpus:
 #     # 텐서플로가 세 번째 GPU만 사용하도록 제한
