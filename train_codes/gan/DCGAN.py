@@ -97,7 +97,7 @@ def gan_train(epoch, batch_size, saving_interval):
         idx = np.random.randint(0, X_train.shape[0], batch_size)
         imgs = X_train[idx]
 
-        # Sample noise and generate a half batch of new images
+        # Sample noise and generate a (half) batch of new images
         noise = np.random.normal(0, 1, (batch_size, 100))
         gen_imgs = generator.predict(noise)
 
