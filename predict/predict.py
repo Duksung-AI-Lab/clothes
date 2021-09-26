@@ -7,7 +7,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 # 모델 불러오기
-model = tf.keras.models.load_model('../model/densenet121_ft_5c_1.h5')
+model = tf.keras.models.load_model('../model/패턴분류모델.h5')
 
 # # 테스트할 데이터셋 불러오기
 # rootPath = '../DataSet/pattern_5class'
