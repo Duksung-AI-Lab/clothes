@@ -65,6 +65,7 @@ function previewImage(targetObj, view_area) {
 	document.getElementById('view_area2').style.display = "none"; // hide
 }
 </script>
+
 <style type="text/css">
 	body{
 		font-family: Objective,sans-serif;
@@ -121,7 +122,7 @@ function previewImage(targetObj, view_area) {
 	}
 
 	.main_title{
-		color: #8C1DF3;
+		color: #B70050;
 	}
 
 </style>
@@ -129,8 +130,8 @@ function previewImage(targetObj, view_area) {
 	<!-- 상단 카테고리 -->
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		  	<h2 style="color: #8C1DF3; margin-top: 10px;">Shirts Classification with CNN</h2>
-		  	<h4 style="color: #8C1DF3; margin-top: 10px; margin-left: auto;">Duksung AI Lab</h4>
+		  	<h2 style="color: #B70050; margin-top: 10px;">Shirts Classification with CNN</h2>
+		  	<h4 style="color: #B70050; margin-top: 10px; margin-left: auto;">Duksung AI Lab</h4>
 		</nav>
 	</header>
 
@@ -182,7 +183,6 @@ function previewImage(targetObj, view_area) {
 			<!-- 분류 결과 이미지 출력 -->
 			<br><br><br><br>
 			{% if class_res %}
-			<h2 style="color: #353535">{{ class_res[-2] }} {{ class_res[-1] }} shirts</h2>
 	 	 	<table class="result_table" id="class_table">
 	 	 		{% for i in range(2) %}
 				<tr>
@@ -198,7 +198,7 @@ function previewImage(targetObj, view_area) {
 		<br><br><br><br><br><br>
 
 		<!-- Target Image 사용자 업로드 -->
-		<div class="sub-div" style="background-color: #ebebeb;">
+		<div class="sub-div" style="background-color: #FCEFE3;">
 		<form method="POST" enctype="multipart/form-data">
 			<h1 align="center" class="main_title">Search Your Image</h1><br><br>
 			<input type="file" name="user_img" id="user_img" value="userImage" accept="image/jpeg,.jpg,.png" onchange="previewImage(this,'view_area')" required/>
@@ -212,8 +212,7 @@ function previewImage(targetObj, view_area) {
 	    {% endif %}
 
 	    {% if search_res %}
-	    <h2 style="color: #353535">{{ search_res[-2] }} {{ search_res[-1] }} shirts</h2>
-	 	 	<table class="result_table" id="search_table">
+	 	 	<table class="result_table" id="search_table" style="background-color: #FFFFFF;">
 	 	 		{% for i in range(2) %}
 				<tr>
 					{% for j in range(5) %}

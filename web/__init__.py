@@ -1,7 +1,7 @@
 import glob
 import os
 import random
-from flask import Flask, escape, request, Response, g, make_response
+from flask import Flask, request
 from flask.templating import render_template
 
 real_path = os.path.dirname(os.path.realpath(__file__))
@@ -38,8 +38,6 @@ def post():
 
             random.shuffle(class_file_list)
             class_file_list = class_file_list[:10]
-            class_file_list.append(collar)
-            class_file_list.append(pattern)
 
         else:
             # User Image
@@ -60,8 +58,6 @@ def post():
 
             random.shuffle(search_file_list)
             search_file_list = search_file_list[:10]
-            search_file_list.append(collar)
-            search_file_list.append(pattern)
 
         return render_template('clothes.html', class_res=class_file_list, search_res=search_file_list,
                                refer_img=refer_img)
