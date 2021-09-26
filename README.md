@@ -9,9 +9,9 @@ find &amp; classification
 
 ## train_codes directory
 학습을 위해 사용한 코드
-simple cnn : 일반 cnn으로 학습
-transfer : 전이학습 이용
-gan : GAN 모델로 이미지 생성 학습
+- simple cnn : 일반 cnn으로 학습
+- transfer : 전이학습 이용
+- gan : GAN 모델로 이미지 생성 학습
 
 ## web directory
 웹 개발을 위해 사용한 코드 및 데이터
