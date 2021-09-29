@@ -9,14 +9,13 @@ from tensorflow.keras.models import load_model
 from mrcnn.config import Config
 from mrcnn.model import MaskRCNN
 
+PATH = os.getcwd().replace("\\", "/") + '/web/static/'
 # Root directory of the project
 ROOT_DIR = os.path.abspath("/content/gdrive/MyDrive/Study/MaskRCNN")  ### 경로 확인
 
-# Import Mask RCNN
-sys.path.append("/content/gdrive/MyDrive/Study/MaskRCNN")  ### 경로 확인
 
 # Path to weights file
-WEIGHTS_PATH = "D:/anaconda/envs/venv_flask/clothes/web/static/models/MaskRCNN_collar_detect.h5"  ### 경로 확인
+WEIGHTS_PATH = PATH+"/models/MaskRCNN_collar_detect.h5"  ### 경로 확인
 
 # Directory to save logs and model checkpoints, if not provided
 DEFAULT_LOGS_DIR = os.path.join(ROOT_DIR, "logs")  ### 경로 확인
@@ -62,10 +61,10 @@ class InferenceConfig(ClothesConfig):
 ############################################################
 # Load collar_model
 ### 경로 확인
-collar_model = load_model("D:/anaconda/envs/venv_flask/clothes/web/static/models/collars_4class.h5")
+collar_model = load_model(PATH+"/models/collars_4class.h5")
 # Load pattern_model
 ### 경로 확인
-pattern_model = load_model("D:/anaconda/envs/venv_flask/clothes/web/static/models/pattern_5class.h5")
+pattern_model = load_model(PATH+"models/pattern_5class.h5")
 # Load Mark-RCNN collar model
 # Configurations
 config = InferenceConfig()
@@ -73,6 +72,7 @@ config = InferenceConfig()
 model = MaskRCNN(mode="inference", config=config, model_dir=DEFAULT_LOGS_DIR)
 # Load weights
 model.load_weights(WEIGHTS_PATH, by_name=True)
+
 collar_model._make_predict_function()
 pattern_model._make_predict_function()
 model.keras_model._make_predict_function()
@@ -82,7 +82,6 @@ model.keras_model._make_predict_function()
 ############################################################
 #  Predict
 ############################################################
-
 
 def collar_predict():
     """detection collars with Mask R-CNN
@@ -142,36 +141,7 @@ def collar_predict():
     # print('예측:', collar_cls_index[collar_result_classes[0]], 100 * max(collar_result[0]))
 
     return collar_cls_index[collar_result_classes[0]]
-'''
-    """ Detection and prediction without Mask R-CNN """
-    # Load collar_model
-    ### 경로 확인
-    collar_model = load_model("models/collars_4class.h5")
 
-    try:
-        # Read image
-        image = cv.imread('user_img.jpg', cv.IMREAD_COLOR)
-
-        # Crop image
-        h, w = image.shape[0] // 3, image.shape[1] // 2
-        fh, fw = h * 5 // 12, h // 2
-        crop_img = image[fh: fh + h, w - fw: w + fw]
-
-        crop_img = cv.resize(crop_img, (224, 224))
-        crop_img = crop_img.astype('float32') / 255.
-        crop_img = crop_img.reshape((1, 224, 224, 3))
-
-        # Predict collar
-        collar_cls_index = ['Band', 'ButtonDown', 'Notched', 'Regular']
-        collar_result_classes = collar_model.predict_classes(crop_img)
-
-    except Exception as e:
-        print(str(e))
-        return "fail"
-
-    return collar_cls_index[collar_result_classes[0]]
-
-'''
 def pattern_predict():
 
     global pattern_model, session, graph
