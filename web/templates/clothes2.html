@@ -288,152 +288,35 @@ function previewImage(targetObj, view_area) {
     </nav>
 	</div>
 
-
 	<center>
- 		<div class="sub-div">
-		<form method="POST">
+		<!-- Target Image 사용자 업로드 -->
+		<div class="sub-div">
+		<form method="POST" enctype="multipart/form-data">
+			<br><br>
+			<input type="file" name="user_img" id="user_img" value="userImage" accept="image/jpeg,.jpg,.png" onchange="previewImage(this,'view_area')" required/>
+			<input type="submit" value="확인" class="search_btn" name="searchform"/><br><br>
+			<div align="center" id='view_area'></div>
 
-<!-- 셔츠/티셔츠/청바지 선택 -->
-			<div class="main">
-			  	<input type="radio" id="tab-1" name="show" checked/>
-			  	<input type="radio" id="tab-2" name="show" />
-				<input type="radio" id="tab-3" name="show" />
+			{% if refer_img %}
+			<div align="center" id='view_area2'>
+	    	<img style="width: 400px; height: auto;" src="{{ url_for('static', filename=refer_img) }}">
+	    </div><br><br>
+	    {% endif %}
 
-				<div class="tab">
-					<label for="tab-1">셔츠</label>
-					<label for="tab-2">티셔츠</label>
-					<label for="tab-3">청바지</label>
-				</div>
-
-
-				<div class="content">
-					<div class="content-dis">
-					셔츠의 body안 내용을 넣으세요.<br>
-
-							<table>
-								<tr>
-									<!-- 카라 선택 영역 -->
-									<td>
-										<h3>Collar</h3>
-										<table class="inner_table">
-											<tr>
-												<td>
-													<input type="radio" name="collars" value="Band" id="collar_r1"><label for="collar_r1" checked><img class="collars_img" src="{{ url_for('static', filename='images/collars_img/band1.png') }}"></label>
-												</td>
-												<td>
-													<input type="radio" name="collars" value="Regular" id="collar_r2"><label for="collar_r2"><img class="collars_img" src="{{ url_for('static', filename='images/collars_img/straight.png') }}"></label>
-												</td>
-												<td>
-													<input type="radio" name="collars" value="Notched" id="collar_r3"><label for="collar_r3"><img class="collars_img" src="{{ url_for('static', filename='images/collars_img/notched.png') }}"></label>
-												</td>
-											</tr>
-											<tr>
-
-												<td>
-													<input type="radio" name="collars" value="ButtonDown" id="collar_r4"><label for="collar_r4"><img class="collars_img" src="{{ url_for('static', filename='images/collars_img/button down.png') }}"></label>
-												</td>
-											</tr>
-										</table>
-									</td>
-
-									<!-- 가운데-레퍼런스 이미지 -->
-									<td rowspan="2">
-										<div style="width: 500px;">
-											<center>
-											<img style="width: 400px; margin-left: 50px; margin-right: 50px;" src="{{ url_for('static', filename='images/reference.jpg') }}">
-											</center>
-										</div>
-									</td>
-
-									<!-- 포켓 선택 영역 -->
-									<td>
-										<h3>Pocket</h3>
-										<table class="inner_table">
-											<tr>
-												<td><input type="button" value="선택 안 함" class="pocket_btn"/></td>
-												<td><input type="button" value="없음" class="pocket_btn"/></td>
-												<td><input type="button" value="1개" class="pocket_btn"/></td>
-											</tr>
-											<tr>
-												<td><input type="button" value="2개" class="pocket_btn"/></td>
-											</tr>
-										</table>
-									</td>
-								</tr>
-
-								<tr>
-									<!-- 패턴 선택 영역 -->
-									<td>
-										<h3>Pattern</h3>
-										<table class="inner_table">
-											<tr>
-												<td>
-													<input type="radio" name="pattern" value="solid" id="pattern_r1"><label for="pattern_r1"><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/solid.png') }}"></label>
-												</td>
-												<td>
-													<input type="radio" name="pattern" value="check" id="pattern_r2"><label for="pattern_r2"><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/check.png') }}"></label>
-												</td>
-												<td>
-													<input type="radio" name="pattern" value="dot" id="pattern_r3"><label for="pattern_r3"><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/dot.png') }}"></label>
-												</td>
-											</tr>
-
-											<tr>
-												<td>
-													<input type="radio" name="pattern" value="floral" id="pattern_r4"><label for="pattern_r4"><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/floral.png') }}"></label>
-												</td>
-												<td>
-													<input type="radio" name="pattern" value="stripe" id="pattern_r5"><label for="pattern_r5"><img class="pattern_img" src="{{ url_for('static', filename='images/pattern_img/stripe.png') }}"></label>
-												</td>
-											</tr>
-										</table>
-									</td>
-
-									<!-- 컬러 선택 영역 -->
-									<td>
-										<h3>Color</h3>
-										<table class="inner_table">
-											<tr>
-
-											</tr>
-
-											<tr>
-
-											</tr>
-										</table>
-									</td>
-
-								</tr>
-							</table>
-					</div>
-
-					<div class="content-dis">
-					  티셔츠의 body안 내용을 넣으세요.
-					</div>
-
-					<div class="content-dis">
-					  청바지의 body안 내용을 넣으세요.
-					</div>
-				</div>
-			</div>
-
-			<br><br><br>
-			<input type="submit" value="확인" class="class_btn" name="classform"/>
-
-			<!-- 분류 결과 이미지 출력 -->
-			<br><br><br><br>
-			{% if class_res %}
-			<h2 style="color: #353535">{{ class_res[-2] }} {{ class_res[-1] }} shirts</h2>
-	 	 	<table class="result_table" id="class_table">
+	    {% if search_res %}
+	    <h2 style="color: #353535">{{ search_res[-1] }} shirts</h2>
+	 	 	<table class="result_table" id="search_table">
 	 	 		{% for i in range(2) %}
 				<tr>
 					{% for j in range(5) %}
-					<td><img class="result_img" src="{{ url_for('static', filename=class_res[i*5+j]) }}"></td>
+					<td><img class="result_img" src="{{ url_for('static', filename=search_res[i*5+j]) }}"></td>
 					{% endfor %}
 				</tr>
 				{% endfor %}
 			</table>
 	    {% endif %}
+			
+			<br><br><br><br><br><br><br><br><br>
 		</form>
 		</div>
 	</center>
