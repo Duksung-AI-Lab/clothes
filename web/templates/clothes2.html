@@ -294,19 +294,19 @@ function previewImage(targetObj, view_area) {
 		<form method="POST" enctype="multipart/form-data">
 			<br><br>
 			<input type="file" name="user_img" id="user_img" value="userImage" accept="image/jpeg,.jpg,.png" onchange="previewImage(this,'view_area')" required/>
-			<input type="submit" value="확인" class="search_btn" name="searchform"/><br><br>
+			<input type="submit" value="확인" class="search_btn"/><br><br>
 			<div align="center" id='view_area'></div>
 
 			{% if refer_img %}
 			<div align="center" id='view_area2'>
 	    	<img style="width: 400px; height: auto;" src="{{ url_for('static', filename=refer_img) }}">
-	    </div><br><br>
-	    {% endif %}
+	    	</div><br><br>
+	    	{% endif %}
 
-	    {% if search_res %}
-	    <h2 style="color: #353535">{{ search_res[-1] }} shirts</h2>
-	 	 	<table class="result_table" id="search_table">
-	 	 		{% for i in range(2) %}
+			{% if search_res %}
+			<h2 style="color: #353535">{{ search_res[-2] }} {{ search_res[-1] }} shirts</h2>
+			<table class="result_table" id="search_table">
+				{% for i in range(2) %}
 				<tr>
 					{% for j in range(5) %}
 					<td><img class="result_img" src="{{ url_for('static', filename=search_res[i*5+j]) }}"></td>
@@ -314,8 +314,7 @@ function previewImage(targetObj, view_area) {
 				</tr>
 				{% endfor %}
 			</table>
-	    {% endif %}
-			
+			{% endif %}
 			<br><br><br><br><br><br><br><br><br>
 		</form>
 		</div>
